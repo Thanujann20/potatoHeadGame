@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab05</title>
+    <style>
+      body {
+        color: blue;
+        background-color : #FFCC99;
+      	font-size: 20px;
+      	text-align: center;
+      	background-attachment: fixed;
+      }
+      #Container {
+        height: 700px;
+       	width: 600px;
+       	margin: 10px auto;
+       	background: linen;
+       	padding: 1px;
+       	border-radius: 17px;
+        border-style: solid;
+        border-color: coral;
+      }
+      .bod {
+	       cursor: pointer;
+       }
+       .image1 {
+         width: 200px;
+         height: 150px;
+       }
+      button {
+        font-size: 1.5em;
+        margin: 5px;
+        Background-color: skyblue;
+        color: white;
+        border: 1px solid skyblue;
+        border-radius:5px;
+      }
+      button:hover {
+        background-color: RoyalBlue;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="https://kit.fontawesome.com/fde1275383.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+      $(function () {
+        $(".bod").draggable()
+        $("#download").on("click", function() {
+          html2canvas(document.querySelector("#Container")).then(canvas => {
+            canvas.toBlob(function(blob) {
+              window.saveAs(blob, 'my_image.jpg');
+            });
+          });
+        });
+        var img_height = $(".image1").height();
+        var img_width = $(".image1").width();
+        $(".image1").mouseenter(function(){
+          $(this).animate({
+                width: "100%",
+                height: "100%"
+          });
+        });
+        $("button").click(function(){
+          $(".image1").animate({
+              width: img_width,
+              height: img_height
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h2>Complete Mr. Potato Head!</h2>
+    <br><br>
+    <div id="Container">
+      <br><br>
+      <div>
+        <img src="body.png"></img>
+      </div>
+      <div>
+        <img class="bod" src="eyes.png"></img>
+        <img class="bod" src="nose.png"></img>
+        <img class="bod" src="mouth.png"></img>
+        <img class="bod" src="hat.png"></img>
+      </div>
+    </div>
+     <button id="download"> Download </button>
+     <div>
+       <br><br>
+       <h1>Hover Over me</h1>
+       <img class="image1" src="potato_head.jpeg" alt="Mr. Potato Head">
+       <br><br>
+       <button><i class="fa-solid fa-rotate-left"></i> Undo</button>
+     </div>
+  </body>
+</html>
